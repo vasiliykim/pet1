@@ -22,18 +22,17 @@ public class VacancyController {
     private VacancyService vacancyService;
 
     @GetMapping("/vacancy")
-    public String vacancy(Model model) {
+    public String allVacancy(Model model) {
 
 
         List<Vacancy> vacancyList = vacancyService.findAll();
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put("bookList", vacancyList);
+        attributes.put("vacancyList", vacancyList);
         model.addAllAttributes(attributes);
-        System.out.println("vacancy");
         return "vacancy";
     }
 
-    @PostMapping("/vacancy/add")
+    @PostMapping("/vacancy")
     public String addVacancy(@RequestParam String description,
                              @RequestParam String salary,
                              Model model){
@@ -41,8 +40,7 @@ public class VacancyController {
         Vacancy vacancy = new Vacancy(description, Integer.valueOf(salary));
 
         vacancyService.saveOrUpdate(vacancy);
-        System.out.println("saved");
-        return "vacancy";
+        return allVacancy(model);
     }
 
 }
