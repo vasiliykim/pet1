@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vacancy VIEW</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body style="height: 100%;">
+<header th:insert="blocks/header"></header>
+
+<div class="container mt-5">
+    <h3>Vacancy Details</h3>
+    <div class="card-body">
+        <p th:text="${{vacancy.createdAt}}"></p>
+        <p th:text="${vacancy.description}">
+        <p th:text="${vacancy.salary}"></p>
+    </div>
+</div>
+<footer th:insert="blocks/footer"></footer>
+</body>
+</html>

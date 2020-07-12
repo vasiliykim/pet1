@@ -63,7 +63,7 @@
                             <p th:text="${{vacancy.createdAt}}"></p>
                             <p th:text="${vacancy.description}">
                             <p th:text="${vacancy.salary}"></p>
-                            <a href="#" class="btn btn-primary">Reply</a>
+                            <a th:href="'/vacancy/' + ${vacancy.id}" class="btn btn-primary">View</a>
                         </div>
                     </div>
                 </div>
