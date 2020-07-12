@@ -1,5 +1,6 @@
 package com.example.pet1.model;
 
+import com.example.pet1.model.base.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.example.pet1.model;
+package com.example.pet1.model.base;
 
 import lombok.Data;
 

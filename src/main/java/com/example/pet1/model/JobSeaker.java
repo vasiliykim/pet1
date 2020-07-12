@@ -1,9 +1,8 @@
 package com.example.pet1.model;
 
-import lombok.Data;
+import com.example.pet1.model.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
