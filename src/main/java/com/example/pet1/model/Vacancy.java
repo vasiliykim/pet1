@@ -2,8 +2,10 @@ package com.example.pet1.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,7 +17,10 @@ public class Vacancy  extends BaseEntity {
     private Integer salary;
 
     @ManyToMany(mappedBy = "appliedVacancies")
-    private Set<JobSeaker> jobSeakers;
+    private Set<JobSeaker> jobSeakers = new HashSet<>();
+
+    @OneToMany(mappedBy = "vacancy", fetch = FetchType.LAZY)
+    private List<VacancyView> vacancyView = new ArrayList<>();
 
     public Vacancy() {
     }

@@ -8,7 +8,9 @@ import org.springframework.data.repository.cdi.Eager;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,6 +40,10 @@ public class JobSeaker extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "vacacny_id"))
     @Getter@Setter
     private Set<Vacancy> appliedVacancies = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobSeaker")
+    @Getter@Setter
+    private List<VacancyView> vacancyViews = new ArrayList<>();
 
     public JobSeaker() {
     }
