@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+<header th:insert="blocks/header"></header>
+<div class="container mt-5">
+    <form method="post" action="/registration">
+        <div class="col-xs-12">
+            <h2>Регистрация</h2>
+        </div>
+        <div class="input-group">
+            <input type="text" name="username" placeholder="Username" autofocus="true"/>
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Password"/>
+        </div>
+        <div>
+            <input type="password" name="passwordConfirm" placeholder="Confirm your password"/>
+        </div>
+        <div>
+            <input type="text" name="firstname"  placeholder="firstname"/>
+        </div>
+        <div>
+            <input type="text" name="lastname" placeholder="lastname"/>
+        </div>
+
+
+
+        <select name="role">
+            <option th:each="role : ${T(com.example.pet1.enumiration.RoleEnum).values()}"
+                    th:value="${role}"
+                    th:text="${role}">
+            </option>
+        </select>
+
+        <br/>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+    <a href="/">Главная</a>
+</div>
+<footer th:insert="blocks/footer"></footer>
+</body>
+</html>

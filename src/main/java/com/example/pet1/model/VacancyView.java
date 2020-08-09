@@ -16,15 +16,15 @@ public class VacancyView extends BaseEntity {
     private Vacancy vacancy;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_seaker_id")
+    @JoinColumn(name = "user_id")
     @Getter@Setter
-    private JobSeaker jobSeaker;
+    private User user;
 
     public VacancyView() {
     }
 
-    public VacancyView(Vacancy vacancy, JobSeaker jobSeaker) {
+    public VacancyView(Vacancy vacancy, User user) {
         this.vacancy = vacancy;
-        this.jobSeaker = jobSeaker;
+        this.user = user;
     }
 }

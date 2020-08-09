@@ -18,7 +18,7 @@ public class Vacancy  extends BaseEntity {
     private Integer salary;
 
     @ManyToMany(mappedBy = "appliedVacancies")
-    private Set<JobSeaker> jobSeakers = new HashSet<>();
+    private Set<User> users = new HashSet<>();
 
     @OneToMany(mappedBy = "vacancy", fetch = FetchType.LAZY)
     private List<VacancyView> vacancyView = new ArrayList<>();
