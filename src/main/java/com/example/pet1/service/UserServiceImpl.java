@@ -4,6 +4,9 @@ import com.example.pet1.model.Role;
 import com.example.pet1.model.User;
 import com.example.pet1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -74,5 +77,18 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated()) {
+            UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (details != null) {
+                String username = details.getUsername();
+                return findByUsername(username);
+            }
+        }
+        return null;
     }
 }

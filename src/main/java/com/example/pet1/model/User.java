@@ -4,6 +4,7 @@ import com.example.pet1.model.base.BaseEntity;
 import com.example.pet1.util.Const;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -85,7 +86,11 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        for(Role role:roles ){
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
     }
 
     @Override
@@ -99,6 +104,12 @@ public class User extends BaseEntity implements UserDetails {
         }
     }
 
+    public boolean hasRole(String role){
+        for (Role r : roles) {
+            if (r.getName().equals(role)) return true;
+        }
+        return false;
+    }
 
     @Override
     public String toString() {

@@ -1,13 +1,16 @@
 package com.example.pet1.controller;
 
 import com.example.pet1.model.Vacancy;
+import com.example.pet1.service.UserService;
 import com.example.pet1.service.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,8 @@ public class VacancyController {
 
     @Autowired
     private VacancyService vacancyService;
+    @Autowired
+    private UserService  userService;
 
     @GetMapping("/vacancy")
     public String allVacancy(Model model) {
@@ -25,6 +30,7 @@ public class VacancyController {
         List<Vacancy> vacancyList = vacancyService.findAll();
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("vacancyList", vacancyList);
+        attributes.put("currentUser", userService.findCurrentUser());
         model.addAllAttributes(attributes);
         return "vacancy";
     }
@@ -44,7 +50,8 @@ public class VacancyController {
                              @RequestParam String salary,
                              Model model){
 
-        Vacancy vacancy = new Vacancy(description, Integer.valueOf(salary));
+
+        Vacancy vacancy = new Vacancy(description, Integer.valueOf(salary), userService.findCurrentUser());
 
         vacancyService.saveOrUpdate(vacancy);
         return allVacancy(model);

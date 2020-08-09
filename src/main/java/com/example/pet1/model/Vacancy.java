@@ -17,6 +17,10 @@ public class Vacancy  extends BaseEntity {
 
     private Integer salary;
 
+    @ManyToOne
+    @JoinColumn(name = "who_made")
+    private User whoMade;
+
     @ManyToMany(mappedBy = "appliedVacancies")
     private Set<User> users = new HashSet<>();
 
@@ -29,5 +33,11 @@ public class Vacancy  extends BaseEntity {
     public Vacancy(String description, Integer salary) {
         this.description = description;
         this.salary = salary;
+    }
+
+    public Vacancy(String description, Integer salary, User whoMade) {
+        this.description = description;
+        this.salary = salary;
+        this.whoMade = whoMade;
     }
 }
